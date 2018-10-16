@@ -1,0 +1,11 @@
+*.pyc
+terminatorlib/*.pyc
+.project
+.pydevproject
+terminatorlib/meliae
+_trial_temp
+terminatorc
+.bzr
+data/terminator.appdata.xml
+data/terminator.desktop
+build/
