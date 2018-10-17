@@ -83,6 +83,9 @@ class Window(Container, Gtk.Window):
             if options.forcedtitle:
                 self.title.force_title(options.forcedtitle)
 
+            if options.classname is not None:
+                self.set_wmclass(options.classname, options.classname)
+
             if options.role:
                 self.set_role(options.role)
             
