@@ -36,7 +36,11 @@ class Notebook(Container, Gtk.Notebook):
         GObject.type_register(Notebook)
         self.register_signals(Notebook)
         self.connect('switch-page', self.deferred_on_tab_switch)
+
+        self.add_events(2097152)  # SCROLL
+        self.add_events(4194304)  # TOUCH
         self.connect('scroll-event', self.on_scroll_event)
+
         self.configure()
 
         child = window.get_child()
@@ -567,11 +571,20 @@ class TabLabel(Gtk.HBox):
         self.config = Config()
 
         self.label = EditableLabel(title)
+        self.label.add_events(2097152)  # SCROLL
+        self.label.add_events(4194304)  # TOUCH
+        self.label.connect('scroll-event', notebook.on_scroll_event)
+
         self.update_angle()
 
         self.pack_start(self.label, True, True, 0)
 
         self.update_button()
+        if self.button:
+            self.button.add_events(2097152)  # SCROLL
+            self.button.add_events(4194304)  # TOUCH
+            self.button.connect('scroll-event', notebook.on_scroll_event)
+
         self.show_all()
 
     def set_label(self, text):
